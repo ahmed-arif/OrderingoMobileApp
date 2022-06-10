@@ -7,7 +7,7 @@ class Store {
   int? id;
   String? storeName;
   int? usersPermissionsUser;
-  String? selfDelivery;
+  bool? selfDelivery;
   double? longitude;
   double? latitude;
   String? storeopen;
@@ -62,20 +62,20 @@ class Store {
           ? map['users_permissions_user'] as int
           : null,
       selfDelivery:
-          map['self_delivery'] != null ? map['self_delivery'] as String : null,
+          map['self_delivery'] != null ? map['self_delivery'] as bool : false,
       longitude: map['longitude'] != null ? map['longitude'] as double : null,
       latitude: map['Latitude'] != null ? map['Latitude'] as double : null,
-      storeopen: map['storeopen'] != null ? map['storeopen'] as String : null,
+      storeopen: map['Storeopen'] != null ? map['Storeopen'] as String : null,
       storeClose:
-          map['storeClose'] != null ? map['storeClose'] as String : null,
+          map['StoreClose'] != null ? map['StoreClose'] as String : null,
       promotion: map['promotion'] != null ? map['promotion'] as String : null,
-      allergen: map['allergen'] != null ? map['allergen'] as String : null,
+      allergen: map['allergen'] != null ? map['allergen'] as String : "",
       publishedAt:
           map['published_at'] != null ? map['published_at'] as String : null,
       createdAt: map['created_at'] != null ? map['created_at'] as String : null,
       updatedAt: map['updated_at'] != null ? map['updated_at'] as String : null,
-      image: map['image'] != null
-          ? Image.fromMap(map['image'] as Map<String, dynamic>)
+      image: map['Image'] != null
+          ? Image.fromMap(map['Image'] as Map<String, dynamic>)
           : null,
     );
   }

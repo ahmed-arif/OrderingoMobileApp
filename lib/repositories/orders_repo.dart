@@ -53,21 +53,21 @@ Future<bool> updateStatus(Orders order) async {
       },
       body: json.encode(order.toJson()),
     );
+    print(response.body);
 
     Map<String, dynamic> responseJson = json.decode(response.body);
 
     if (response.statusCode == 200) {
-      if (responseJson['status'] == 200) {
-        return true;
-      } else {
-        Fluttertoast.showToast(msg: responseJson['message']);
-        return false;
-      }
+      return true;
     } else {
-      print(response.reasonPhrase);
-      Fluttertoast.showToast(msg: response.reasonPhrase!);
+      Fluttertoast.showToast(msg: responseJson['message']);
       return false;
     }
+    // } else {
+    //   print(response.reasonPhrase);
+    //   Fluttertoast.showToast(msg: response.reasonPhrase!);
+    //   return false;
+    // }
   } catch (e) {
     print(e.toString());
 

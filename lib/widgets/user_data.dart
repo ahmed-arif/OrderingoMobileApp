@@ -49,8 +49,8 @@ class UserData extends StatelessWidget {
                           );
                         }
                       },
-                      child: UserCircularAvatar(
-                        imgUrl: user.imageUrl!,
+                      child: const UserCircularAvatar(
+                        imgUrl: "",
                         height: 120.0,
                         width: 100.0,
                         adjustment: BoxFit.fill,

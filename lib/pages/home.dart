@@ -26,15 +26,17 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     _con.getAllOrders();
+
     getStatus();
     setState(() {});
     super.initState();
   }
 
   Future getStatus() async {
-    Future.delayed(const Duration(seconds: 1), () {
+    Future.delayed(const Duration(seconds: 2), () {
       for (int i = 0; i <= _con.vendorOrders.length; i++) {
-        _con.vendorOrders[i].orderStatus.name! == "Pending"
+        print(_con.vendorOrders[i].orderStatus[0].name!);
+        _con.vendorOrders[i].orderStatus[0].name!.toLowerCase() == "pending"
             ? pending.value = pending.value + 1
             : deliver.value = deliver.value + 1;
       }
@@ -240,7 +242,7 @@ class _HomePageState extends State<HomePage> {
                                                 child: OrderList(
                                                   status: _con
                                                       .vendorOrders[index]
-                                                      .orderStatus
+                                                      .orderStatus[0]
                                                       .name, //projectList[index]?.projectName ?? "",
                                                   orderNum: "Order# " +
                                                       _con.vendorOrders[index]

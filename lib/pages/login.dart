@@ -133,8 +133,6 @@ class _LoginPageState extends State<LoginPage> {
             return;
           } else {
             _loginFormKey.currentState!.save();
-            print(_con.user.email);
-            print(_con.user.password);
 
             _con.login(context);
           }

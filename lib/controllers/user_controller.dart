@@ -24,6 +24,7 @@ class UserController extends GetxController {
     user_repo.login(user).then((User _user) {
       if (_user.email != null && _user.email!.isNotEmpty) {
         Get.to(const HomePage());
+        Fluttertoast.showToast(msg: "Login Successfull !");
       } else {
         Fluttertoast.showToast(msg: "Failed! No record found");
       }

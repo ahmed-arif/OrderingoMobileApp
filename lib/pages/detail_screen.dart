@@ -8,13 +8,18 @@ import 'package:com_unrealprogrammer_orderingo/models/orders.dart';
 import 'package:com_unrealprogrammer_orderingo/widgets/table.dart';
 import 'package:get/get.dart';
 
-class DetailScreen extends StatelessWidget {
+class DetailScreen extends StatefulWidget {
   Orders order;
   DetailScreen({
     Key? key,
     required this.order,
   }) : super(key: key);
 
+  @override
+  State<DetailScreen> createState() => _DetailScreenState();
+}
+
+class _DetailScreenState extends State<DetailScreen> {
   final OrdersController _con = Get.put(OrdersController());
 
   @override
@@ -46,7 +51,7 @@ class DetailScreen extends StatelessWidget {
                             fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        order.id.toString(),
+                        widget.order.id.toString(),
                         style: TextStyle(
                             color: Theme.of(context).primaryColor,
                             fontWeight: FontWeight.normal),
@@ -64,7 +69,7 @@ class DetailScreen extends StatelessWidget {
                             fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        order.orderStatus.name!,
+                        widget.order.orderStatus[0].name!,
                         style: TextStyle(
                             color: Theme.of(context).primaryColor,
                             fontWeight: FontWeight.normal),
@@ -89,7 +94,7 @@ class DetailScreen extends StatelessWidget {
                             fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        order.createdAt.toString().split(" ").first,
+                        widget.order.createdAt.toString().split(" ").first,
                         style: TextStyle(
                             color: Theme.of(context).primaryColor,
                             fontWeight: FontWeight.normal),
@@ -107,7 +112,7 @@ class DetailScreen extends StatelessWidget {
                             fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        order.createdAt.toString().split(" ").first,
+                        widget.order.createdAt.toString().split(" ").first,
                         style: TextStyle(
                             color: Theme.of(context).primaryColor,
                             fontWeight: FontWeight.normal),
@@ -123,7 +128,7 @@ class DetailScreen extends StatelessWidget {
               horizontal: 20,
               vertical: 20,
             ),
-            child: OrdersTable([order]
+            child: OrdersTable([widget.order]
                 //   [
                 // Orders.fromMap({
                 //   "name": order.name,
@@ -163,27 +168,32 @@ class DetailScreen extends StatelessWidget {
                 strokeWidth: 2,
                 child: GestureDetector(
                   onTap: () {
-                    if (order.orderStatus.name!.toLowerCase() == "pending") {
+                    if (widget.order.orderStatus[0].name!.toLowerCase() ==
+                        "pending") {
                       Orders status = Orders(
-                          id: order.id,
-                          store: order.store,
-                          deliveryDate: order.deliveryDate,
-                          orderStatus: OrderStatus(
+                        id: widget.order.id,
+                        store: widget.order.store,
+                        deliveryDate: widget.order.deliveryDate,
+                        orderStatus: [
+                          OrderStatus(
                               name: "Ready For Ship",
-                              id: order.orderStatus.id,
-                              isActive: order.orderStatus.isActive),
-                          name: order.name,
-                          deliverType: order.deliverType,
-                          weeklyNeeded: order.weeklyNeeded,
-                          totalAmount: order.totalAmount,
-                          disocunt: order.disocunt,
-                          publishedAt: order.publishedAt,
-                          createdAt: order.createdAt,
-                          updatedAt: order.updatedAt,
-                          usersPermissionsUsers: order.usersPermissionsUsers,
-                          orderDetails: order.orderDetails);
+                              id: widget.order.orderStatus[0].id,
+                              isActive: true),
+                        ],
+                        name: widget.order.name,
+                        deliverType: widget.order.deliverType,
+                        weeklyNeeded: widget.order.weeklyNeeded,
+                        totalAmount: widget.order.totalAmount,
+                        disocunt: widget.order.disocunt,
+                        publishedAt: widget.order.publishedAt,
+                        createdAt: widget.order.createdAt,
+                        updatedAt: widget.order.updatedAt,
+                        // usersPermissionsUsers: order.usersPermissionsUsers,
+                        // orderDetails: order.orderDetails
+                      );
                       _con.updateStatus(status);
-                      Navigator.pop(context);
+                      setState(() {});
+                      //  Navigator.pop(context);
                     }
                   },
                   child: Container(
@@ -213,7 +223,7 @@ class DetailScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
-                  "\$" + (order.totalAmount * 2).toString(),
+                  "\$" + (widget.order.totalAmount * 2).toString(),
                   style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
               )
@@ -252,7 +262,7 @@ class DetailScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
-                  "\$" + order.disocunt.toString(),
+                  "\$" + widget.order.disocunt.toString(),
                   style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
               )
@@ -294,7 +304,7 @@ class DetailScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
-                  "\$" + (order.totalAmount * 2 + 39).toString(),
+                  "\$" + (widget.order.totalAmount * 2 + 39).toString(),
                   style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
               )

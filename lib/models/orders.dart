@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
+import 'package:com_unrealprogrammer_orderingo/models/deliveryTime.dart';
 import 'package:com_unrealprogrammer_orderingo/models/order_status.dart';
 import 'package:com_unrealprogrammer_orderingo/models/stores.dart';
 
@@ -14,17 +15,17 @@ class Orders {
   int id;
   Store store;
   DateTime deliveryDate;
-  OrderStatus orderStatus;
+  List<OrderStatus> orderStatus;
   String name;
-  OrderStatus deliverType;
+  List<dynamic> deliverType;
   bool weeklyNeeded;
   int totalAmount;
   int disocunt;
   DateTime publishedAt;
   DateTime createdAt;
   DateTime updatedAt;
-  List<dynamic> usersPermissionsUsers;
-  List<dynamic> orderDetails;
+  // List<dynamic> usersPermissionsUsers;
+  // List<dynamic> orderDetails;
   Orders({
     required this.id,
     required this.store,
@@ -38,26 +39,33 @@ class Orders {
     required this.publishedAt,
     required this.createdAt,
     required this.updatedAt,
-    required this.usersPermissionsUsers,
-    required this.orderDetails,
+    // required this.usersPermissionsUsers,
+    // required this.orderDetails,
   });
 
   factory Orders.fromJson(Map<String, dynamic> json) => Orders(
         id: json["id"],
         store: Store.fromMap(json["store"]),
-        deliveryDate: DateTime.parse(json["delivery_date"]),
-        orderStatus: OrderStatus.fromMap(json["order_status"]),
+        deliveryDate: (json["delivery_date"]) != null
+            ? DateTime.parse(json["delivery_date"])
+            : DateTime.now(),
+        orderStatus: List<OrderStatus>.from(
+                json["order_statuses"].map((x) => OrderStatus.fromMap(x)))
+            .toList(), //OrderStatus.fromMap(json["order_statuses"]),
         name: json["name"],
-        deliverType: OrderStatus.fromMap(json["Deliver_type"]),
+        deliverType: json["deliver_types"] ??
+            List<DeliverTypes>.from(
+                    json["deliver_types"].map((x) => DeliverTypes.fromMap(x)))
+                .toList(),
         weeklyNeeded: json["Weekly_needed"],
-        totalAmount: json["Total_amount"],
-        disocunt: json["Disocunt"],
+        totalAmount: json["Total_amount"] ?? 0,
+        disocunt: json["Disocunt"] ?? 0,
         publishedAt: DateTime.parse(json["published_at"]),
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
-        usersPermissionsUsers:
-            List<dynamic>.from(json["users_permissions_users"].map((x) => x)),
-        orderDetails: List<dynamic>.from(json["order_details"].map((x) => x)),
+        // usersPermissionsUsers:
+        //     List<dynamic>.from(json["users_permissions_users"].map((x) => x)),
+        // orderDetails: List<dynamic>.from(json["order_details"].map((x) => x)),
       );
 
   Map<String, dynamic> toJson() => {
@@ -73,9 +81,9 @@ class Orders {
         "published_at": publishedAt.toIso8601String(),
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
-        "users_permissions_users":
-            List<dynamic>.from(usersPermissionsUsers.map((x) => x)),
-        "order_details": List<dynamic>.from(orderDetails.map((x) => x)),
+        // "users_permissions_users":
+        //     List<dynamic>.from(usersPermissionsUsers.map((x) => x)),
+        // "order_details": List<dynamic>.from(orderDetails.map((x) => x)),
       };
 
   Map<String, dynamic> toMap() {
@@ -83,41 +91,41 @@ class Orders {
       'id': id,
       'store': store.toMap(),
       'deliveryDate': deliveryDate.millisecondsSinceEpoch,
-      'orderStatus': orderStatus.toMap(),
+      'orderStatus': orderStatus[0].toMap(),
       'name': name,
-      'deliverType': deliverType.toMap(),
+      'deliverType': deliverType[0].toMap(),
       'weeklyNeeded': weeklyNeeded,
       'totalAmount': totalAmount,
       'disocunt': disocunt,
       'publishedAt': publishedAt.millisecondsSinceEpoch,
       'createdAt': createdAt.millisecondsSinceEpoch,
       'updatedAt': updatedAt.millisecondsSinceEpoch,
-      'usersPermissionsUsers': usersPermissionsUsers,
-      'orderDetails': orderDetails,
+      // 'usersPermissionsUsers': usersPermissionsUsers,
+      // 'orderDetails': orderDetails,
     };
   }
 
-  factory Orders.fromMap(Map<String, dynamic> map) {
-    return Orders(
-      id: map['id'] as int,
-      store: Store.fromMap(map['store'] as Map<String, dynamic>),
-      deliveryDate:
-          DateTime.fromMillisecondsSinceEpoch(map['deliveryDate'] as int),
-      orderStatus:
-          OrderStatus.fromMap(map['orderStatus'] as Map<String, dynamic>),
-      name: map['name'] as String,
-      deliverType:
-          OrderStatus.fromMap(map['deliverType'] as Map<String, dynamic>),
-      weeklyNeeded: map['weeklyNeeded'] as bool,
-      totalAmount: map['totalAmount'] as int,
-      disocunt: map['disocunt'] as int,
-      publishedAt:
-          DateTime.fromMillisecondsSinceEpoch(map['publishedAt'] as int),
-      createdAt: DateTime.fromMillisecondsSinceEpoch(map['createdAt'] as int),
-      updatedAt: DateTime.fromMillisecondsSinceEpoch(map['updatedAt'] as int),
-      usersPermissionsUsers:
-          List<dynamic>.from((map['usersPermissionsUsers']) as List<dynamic>),
-      orderDetails: List<dynamic>.from((map['orderDetails'] as List<dynamic>)),
-    );
-  }
+  // factory Orders.fromMap(Map<String, dynamic> map) {
+  //   return Orders(
+  //     id: map['id'] as int,
+  //     store: Store.fromMap(map['store'] as Map<String, dynamic>),
+  //     deliveryDate:
+  //         DateTime.fromMillisecondsSinceEpoch(map['deliveryDate'] as int),
+  //     orderStatus:
+  //         OrderStatus.fromMap(map['orderStatus'] as Map<String, dynamic>),
+  //     name: map['name'] as String,
+  //     deliverType:
+  //         OrderStatus.fromMap(map['deliverType'] as Map<String, dynamic>),
+  //     weeklyNeeded: map['weeklyNeeded'] as bool,
+  //     totalAmount: map['totalAmount'] as int,
+  //     disocunt: map['disocunt'] as int,
+  //     publishedAt:
+  //         DateTime.fromMillisecondsSinceEpoch(map['publishedAt'] as int),
+  //     createdAt: DateTime.fromMillisecondsSinceEpoch(map['createdAt'] as int),
+  //     updatedAt: DateTime.fromMillisecondsSinceEpoch(map['updatedAt'] as int),
+  //     usersPermissionsUsers:
+  //         List<dynamic>.from((map['usersPermissionsUsers']) as List<dynamic>),
+  //     orderDetails: List<dynamic>.from((map['orderDetails'] as List<dynamic>)),
+  //   );
+  // }
 }

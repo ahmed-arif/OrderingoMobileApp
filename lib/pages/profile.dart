@@ -209,7 +209,7 @@ class _ProfileState extends State<Profile> {
           ),
           _userAttributeListTile(
             icon: Icons.phone,
-            text: user_repo.currentUser.value.contactNumber!,
+            text: "",
           ),
           SizedBox(
             height: MediaQuery.of(context).size.height * 0.037,
@@ -223,7 +223,7 @@ class _ProfileState extends State<Profile> {
           ),
           _userAttributeListTile(
             icon: Icons.location_on,
-            text: user_repo.currentUser.value.shopAddress!,
+            text: "",
           ),
         ],
       );
