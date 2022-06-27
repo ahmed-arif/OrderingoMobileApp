@@ -171,28 +171,29 @@ class _DetailScreenState extends State<DetailScreen> {
                     if (widget.order.orderStatus[0].name!.toLowerCase() ==
                         "pending") {
                       Orders status = Orders(
-                        id: widget.order.id,
-                        store: widget.order.store,
-                        deliveryDate: widget.order.deliveryDate,
-                        orderStatus: [
-                          OrderStatus(
-                              name: "Ready For Ship",
-                              id: widget.order.orderStatus[0].id,
-                              isActive: true),
-                        ],
-                        name: widget.order.name,
-                        deliverType: widget.order.deliverType,
-                        weeklyNeeded: widget.order.weeklyNeeded,
-                        totalAmount: widget.order.totalAmount,
-                        disocunt: widget.order.disocunt,
-                        publishedAt: widget.order.publishedAt,
-                        createdAt: widget.order.createdAt,
-                        updatedAt: widget.order.updatedAt,
-                        // usersPermissionsUsers: order.usersPermissionsUsers,
-                        // orderDetails: order.orderDetails
-                      );
+                          id: widget.order.id,
+                          store: widget.order.store,
+                          deliveryDate: widget.order.deliveryDate,
+                          orderStatus: [
+                            OrderStatus(
+                                name: "Ready For Ship",
+                                id: widget.order.orderStatus[0].id,
+                                isActive: true),
+                          ],
+                          name: widget.order.name,
+                          deliverType: widget.order.deliverType,
+                          weeklyNeeded: widget.order.weeklyNeeded,
+                          totalAmount: widget.order.totalAmount,
+                          disocunt: widget.order.disocunt,
+                          publishedAt: widget.order.publishedAt,
+                          createdAt: widget.order.createdAt,
+                          updatedAt: widget.order.updatedAt,
+                          quantity: widget.order.quantity
+                          // usersPermissionsUsers: order.usersPermissionsUsers,
+                          // orderDetails: order.orderDetails
+                          );
                       _con.updateStatus(status);
-                      setState(() {});
+                      // setState(() {});
                       //  Navigator.pop(context);
                     }
                   },
@@ -223,7 +224,10 @@ class _DetailScreenState extends State<DetailScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
-                  "\$" + (widget.order.totalAmount * 2).toString(),
+                  "\$" +
+                      (widget.order.totalAmount *
+                              int.parse(widget.order.quantity))
+                          .toString(),
                   style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
               )
@@ -304,7 +308,11 @@ class _DetailScreenState extends State<DetailScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Text(
-                  "\$" + (widget.order.totalAmount * 2 + 39).toString(),
+                  "\$" +
+                      (widget.order.totalAmount *
+                                  int.parse(widget.order.quantity) +
+                              (39 - widget.order.disocunt))
+                          .toString(),
                   style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
               )

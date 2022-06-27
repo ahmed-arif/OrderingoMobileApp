@@ -38,67 +38,69 @@ class UserData extends StatelessWidget {
         Stack(
           children: [
             Obx(() {
-              return imageName.value.isEmpty
-                  ? GestureDetector(
-                      onTap: () {
-                        if (user.imageUrl!.isNotEmpty) {
-                          Get.dialog(
-                            ImageDialogWidget(
-                              user.imageUrl!,
-                            ),
-                          );
-                        }
-                      },
-                      child: const UserCircularAvatar(
-                        imgUrl: "",
-                        height: 120.0,
-                        width: 100.0,
-                        adjustment: BoxFit.fill,
-                      ),
-                    )
-                  : GestureDetector(
-                      onTap: () {
-                        ImageProvider profileImage = FileImage(_imageFile);
-                        Get.dialog(
-                          GeneralImageViewDialog(
-                            profileImage,
-                          ),
-                        );
-                      },
-                      child: Container(
-                        height: 120.0,
-                        width: 100.0,
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          image: DecorationImage(
-                            image: FileImage(_imageFile),
-                            fit: BoxFit.fill,
-                          ),
-                        ),
-                      ),
-                    );
+              return
+                  // imageName.value.isEmpty
+                  //     ?
+                  GestureDetector(
+                onTap: () {
+                  // if (user.imageUrl!.isNotEmpty) {
+                  //   Get.dialog(
+                  //     ImageDialogWidget(
+                  //       user.imageUrl!,
+                  //     ),
+                  //   );
+                  // }
+                },
+                child: const UserCircularAvatar(
+                  imgUrl: "",
+                  height: 120.0,
+                  width: 100.0,
+                  adjustment: BoxFit.fill,
+                ),
+              );
+              // : GestureDetector(
+              //     onTap: () {
+              //       ImageProvider profileImage = FileImage(_imageFile);
+              //       Get.dialog(
+              //         GeneralImageViewDialog(
+              //           profileImage,
+              //         ),
+              //       );
+              //     },
+              //     child: Container(
+              //       height: 120.0,
+              //       width: 100.0,
+              //       decoration: BoxDecoration(
+              //         shape: BoxShape.circle,
+              //         image: DecorationImage(
+              //           image: FileImage(_imageFile),
+              //           fit: BoxFit.fill,
+              //         ),
+              //       ),
+              //     ),
+              //   );
             }),
-            Positioned(
-                top: 75,
-                left: 60,
-                child: Container(
-                  height: 40,
-                  width: 40,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      color: Theme.of(context).primaryColor),
-                  child: Center(
-                    child: IconButton(
-                      icon: const Icon(
-                        Icons.add_a_photo_outlined,
-                        color: Colors.white,
-                      ),
-                      onPressed: () {
-                        _selectImage();
-                      },
-                    ),
-                  ),
-                )),
+            // Positioned(
+            //     top: 75,
+            //     left: 60,
+            //     child: Container(
+            //       height: 40,
+            //       width: 40,
+            //       decoration: BoxDecoration(
+            //           borderRadius: BorderRadius.circular(30),
+            //           color: Theme.of(context).primaryColor),
+            //       child: Center(
+            //         child: IconButton(
+            //           icon: const Icon(
+            //             Icons.add_a_photo_outlined,
+            //             color: Colors.white,
+            //           ),
+            //           onPressed: () {
+            //             _selectImage();
+            //           },
+            //         ),
+            //       ),
+            //     )),
           ],
         ),
         SizedBox(height: MediaQuery.of(context).size.height * 0.015),

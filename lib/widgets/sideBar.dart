@@ -69,17 +69,32 @@ class _SideBarState extends State<SideBar>
             children: <Widget>[
               Expanded(
                   child: Container(
-                color: Theme.of(context).primaryColor,
+                color: Colors.grey[300],
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     InkWell(
-                      child: const Text(
-                        "Home Page",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 25,
-                        ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          const SizedBox(
+                            width: 20,
+                          ),
+                          Icon(
+                            Icons.home_outlined,
+                            color: Theme.of(context).primaryColor,
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            "Home Page",
+                            style: TextStyle(
+                              color: Theme.of(context).primaryColor,
+                              fontSize: 25,
+                            ),
+                          ),
+                        ],
                       ),
                       onTap: () {
                         onIconPressed();
@@ -87,12 +102,27 @@ class _SideBarState extends State<SideBar>
                     ),
                     const SizedBox(height: 20),
                     InkWell(
-                      child: const Text(
-                        "Messages",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 25,
-                        ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          const SizedBox(
+                            width: 20,
+                          ),
+                          Icon(
+                            Icons.mail_outline,
+                            color: Theme.of(context).primaryColor,
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Text(
+                            "Messages",
+                            style: TextStyle(
+                              color: Theme.of(context).primaryColor,
+                              fontSize: 25,
+                            ),
+                          ),
+                        ],
                       ),
                       onTap: () {},
                     ),
@@ -109,8 +139,8 @@ class _SideBarState extends State<SideBar>
                     // ),
                     const SizedBox(height: 20),
                     SizedBox(
-                      width: 80,
-                      height: AppBar().preferredSize.height,
+                      // width: 100,
+                      // height: AppBar().preferredSize.height,
                       child: InkWell(
                         onTap: () {
                           showDialog(
@@ -137,14 +167,27 @@ class _SideBarState extends State<SideBar>
                             ),
                           );
                         },
-                        child: const Center(
-                          child: Text(
-                            "Logout",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            const SizedBox(
+                              width: 20,
                             ),
-                          ),
+                            Icon(
+                              Icons.logout_outlined,
+                              color: Theme.of(context).primaryColor,
+                            ),
+                            const SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              "Logout",
+                              style: TextStyle(
+                                color: Theme.of(context).primaryColor,
+                                fontSize: 20,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
@@ -162,12 +205,12 @@ class _SideBarState extends State<SideBar>
                     child: Container(
                       width: MediaQuery.of(context).size.width * 0.1,
                       height: MediaQuery.of(context).size.height * 0.14,
-                      color: Theme.of(context).primaryColor,
+                      color: Colors.grey[300],
                       alignment: Alignment.centerLeft,
                       child: AnimatedIcon(
                         icon: AnimatedIcons.menu_close,
                         progress: _animationControler.view,
-                        color: Colors.white,
+                        color: Theme.of(context).primaryColor,
                         size: 25,
                       ),
                     ),

@@ -24,6 +24,7 @@ class Orders {
   DateTime publishedAt;
   DateTime createdAt;
   DateTime updatedAt;
+  String quantity;
   // List<dynamic> usersPermissionsUsers;
   // List<dynamic> orderDetails;
   Orders({
@@ -39,6 +40,7 @@ class Orders {
     required this.publishedAt,
     required this.createdAt,
     required this.updatedAt,
+    required this.quantity,
     // required this.usersPermissionsUsers,
     // required this.orderDetails,
   });
@@ -58,8 +60,9 @@ class Orders {
                     json["deliver_types"].map((x) => DeliverTypes.fromMap(x)))
                 .toList(),
         weeklyNeeded: json["Weekly_needed"],
-        totalAmount: json["Total_amount"] ?? 0,
-        disocunt: json["Disocunt"] ?? 0,
+        quantity: json["quantity"] ?? "0",
+        totalAmount: json["total_amount"] ?? 0,
+        disocunt: json["disocunt"] ?? 0,
         publishedAt: DateTime.parse(json["published_at"]),
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),

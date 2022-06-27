@@ -13,7 +13,7 @@ class SplashController extends GetxController {
     user_repo
         .getCurrentUser()
         .then((User _u) {
-          if (_u.authToken != null && _u.authToken!.isNotEmpty) {
+          if (_u.email != null && _u.email!.isNotEmpty) {
             Get.offAllNamed('/home');
           } else {
             Get.to(

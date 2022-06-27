@@ -120,15 +120,15 @@ class OrdersTable extends StatelessWidget {
             ),
           ),
         ),
-        const Center(
+        Center(
           child: Padding(
-            padding: EdgeInsets.symmetric(
+            padding: const EdgeInsets.symmetric(
               vertical: verticalPadding,
               horizontal: horizontalPadding,
             ),
             child: Text(
-              '2',
-              style: TextStyle(
+              orders.quantity.toString(),
+              style: const TextStyle(
                 fontSize: 12,
               ),
             ),
