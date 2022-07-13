@@ -116,7 +116,7 @@ class _SideBarState extends State<SideBar>
                             width: 10,
                           ),
                           Text(
-                            "Messages",
+                            "Notifications",
                             style: TextStyle(
                               color: Theme.of(context).primaryColor,
                               fontSize: 25,

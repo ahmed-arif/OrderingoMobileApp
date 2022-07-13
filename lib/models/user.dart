@@ -9,11 +9,11 @@ class User {
   String? password;
   String? shopAddress;
   String? contactNumber;
-  String? imageUrl;
+  // String? imageUrl;
   String? authToken;
   String? pastExperience;
   int? status;
-  File? imageFile;
+  Map<String, dynamic>? imageUrl;
 
   User();
 
@@ -24,6 +24,7 @@ class User {
       fname = jsonMap['FirstName'] ?? '';
       lname = jsonMap['LastName'] ?? '';
       email = jsonMap['email'] ?? '';
+      imageUrl = jsonMap['userImage'] ?? {};
     } catch (e) {
       print("User Model Error: $e");
     }

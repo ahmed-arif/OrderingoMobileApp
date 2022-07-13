@@ -1,4 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:developer';
+
 import 'package:com_unrealprogrammer_orderingo/controllers/orders_controller.dart';
 import 'package:com_unrealprogrammer_orderingo/models/order_status.dart';
 import 'package:dotted_border/dotted_border.dart';
@@ -170,31 +172,10 @@ class _DetailScreenState extends State<DetailScreen> {
                   onTap: () {
                     if (widget.order.orderStatus[0].name!.toLowerCase() ==
                         "pending") {
-                      Orders status = Orders(
-                          id: widget.order.id,
-                          store: widget.order.store,
-                          deliveryDate: widget.order.deliveryDate,
-                          orderStatus: [
-                            OrderStatus(
-                                name: "Ready For Ship",
-                                id: widget.order.orderStatus[0].id,
-                                isActive: true),
-                          ],
-                          name: widget.order.name,
-                          deliverType: widget.order.deliverType,
-                          weeklyNeeded: widget.order.weeklyNeeded,
-                          totalAmount: widget.order.totalAmount,
-                          disocunt: widget.order.disocunt,
-                          publishedAt: widget.order.publishedAt,
-                          createdAt: widget.order.createdAt,
-                          updatedAt: widget.order.updatedAt,
-                          quantity: widget.order.quantity
-                          // usersPermissionsUsers: order.usersPermissionsUsers,
-                          // orderDetails: order.orderDetails
-                          );
-                      _con.updateStatus(status);
-                      // setState(() {});
-                      //  Navigator.pop(context);
+                      _con.updateStatus(widget.order);
+                      _con.refreshOrders();
+                      setState(() {});
+                      Navigator.pop(context);
                     }
                   },
                   child: Container(

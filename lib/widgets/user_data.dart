@@ -1,12 +1,14 @@
 import 'dart:io';
 
+import 'package:com_unrealprogrammer_orderingo/repositories/user_repo.dart';
 import 'package:com_unrealprogrammer_orderingo/widgets/general_image_view_dialog.dart';
 import 'package:com_unrealprogrammer_orderingo/widgets/image_dialog.dart';
 import 'package:com_unrealprogrammer_orderingo/widgets/user_circular_avatar.dart';
+import '../repositories/user_repo.dart' as user_repo;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
-
+import '../helpers/app_constants.dart' as constants;
 import '../models/user.dart';
 
 class UserData extends StatelessWidget {
@@ -22,14 +24,14 @@ class UserData extends StatelessWidget {
     required this.updateImage,
   }) : super(key: key);
 
-  void _selectImage() async {
-    final XFile? pickedFile =
-        await _picker.pickImage(source: ImageSource.gallery, imageQuality: 60);
-    if (pickedFile != null) {
-      _imageFile = File(pickedFile.path);
-      imageName.value = _imageFile.path.split('/').last;
-    }
-  }
+  // void _selectImage() async {
+  //   final XFile? pickedFile =
+  //       await _picker.pickImage(source: ImageSource.gallery, imageQuality: 60);
+  //   if (pickedFile != null) {
+  //     _imageFile = File(pickedFile.path);
+  //     imageName.value = _imageFile.path.split('/').last;
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -37,49 +39,68 @@ class UserData extends StatelessWidget {
       children: [
         Stack(
           children: [
-            Obx(() {
-              return
-                  // imageName.value.isEmpty
-                  //     ?
-                  GestureDetector(
-                onTap: () {
-                  // if (user.imageUrl!.isNotEmpty) {
-                  //   Get.dialog(
-                  //     ImageDialogWidget(
-                  //       user.imageUrl!,
-                  //     ),
-                  //   );
-                  // }
-                },
-                child: const UserCircularAvatar(
-                  imgUrl: "",
-                  height: 120.0,
-                  width: 100.0,
-                  adjustment: BoxFit.fill,
-                ),
-              );
-              // : GestureDetector(
-              //     onTap: () {
-              //       ImageProvider profileImage = FileImage(_imageFile);
-              //       Get.dialog(
-              //         GeneralImageViewDialog(
-              //           profileImage,
-              //         ),
-              //       );
-              //     },
-              //     child: Container(
-              //       height: 120.0,
-              //       width: 100.0,
-              //       decoration: BoxDecoration(
-              //         shape: BoxShape.circle,
-              //         image: DecorationImage(
-              //           image: FileImage(_imageFile),
-              //           fit: BoxFit.fill,
-              //         ),
-              //       ),
-              //     ),
-              //   );
-            }),
+            const SizedBox(height: 20),
+            user_repo.currentUser.value.imageUrl != null
+                ? CircleAvatar(
+                    backgroundImage: NetworkImage(
+                      "http://192.168.5.53:1337" +
+                          user_repo.currentUser.value.imageUrl!['url'],
+                    ),
+                    radius: 60,
+                  )
+                : const UserCircularAvatar(
+                    imgUrl: "",
+                    height: 120.0,
+                    width: 100.0,
+                    adjustment: BoxFit.fill,
+                  ),
+
+            // Obx(() {
+            //   return
+            // imageName.value.isEmpty
+            //     ?
+            // GestureDetector(
+            //   onTap: () {
+            //     // if (user.imageUrl!.isNotEmpty) {
+            //     //   Get.dialog(
+            //     //     ImageDialogWidget(
+            //     //       user.imageUrl!,
+            //     //     ),
+            //     //   );
+            //     // }
+            //     print("http://192.168.5.53:1337" +
+            //         user_repo.currentUser.value.imageUrl!['url']);
+            //   },
+            //   child: UserCircularAvatar(
+            //     imgUrl: "http://192.168.5.53:1337" +
+            //         user_repo.currentUser.value.imageUrl!['url'],
+            //     height: 120.0,
+            //     width: 100.0,
+            //     adjustment: BoxFit.fill,
+            //   ),
+            // )
+            // : GestureDetector(
+            //     onTap: () {
+            //       ImageProvider profileImage = FileImage(_imageFile);
+            //       Get.dialog(
+            //         GeneralImageViewDialog(
+            //           profileImage,
+            //         ),
+            //       );
+            //     },
+            //     child: Container(
+            //       height: 120.0,
+            //       width: 100.0,
+            //       decoration: BoxDecoration(
+            //         shape: BoxShape.circle,
+            //         image: DecorationImage(
+            //           image: FileImage(_imageFile),
+            //           fit: BoxFit.fill,
+            //         ),
+            //       ),
+            //     ),
+            //   );
+            //  }),
             // Positioned(
             //     top: 75,
             //     left: 60,

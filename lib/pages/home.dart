@@ -32,7 +32,9 @@ class _HomePageState extends State<HomePage> {
     super.initState();
   }
 
-  Future getStatus() async {
+  Future<void> getStatus() async {
+    pending.value = 0;
+    deliver.value = 0;
     Future.delayed(const Duration(seconds: 2), () {
       for (int i = 0; i <= _con.vendorOrders.length; i++) {
         print(_con.vendorOrders[i].orderStatus[0].name!);
@@ -47,6 +49,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    String image = user_repo.currentUser.value.imageUrl!['url'];
 
     return SafeArea(
       child: Scaffold(
@@ -54,6 +57,7 @@ class _HomePageState extends State<HomePage> {
           onWillPop: () async => false,
           child: RefreshIndicator(
             onRefresh: () async {
+              getStatus();
               return _con.refreshOrders();
             },
             child: Stack(
@@ -65,16 +69,30 @@ class _HomePageState extends State<HomePage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: <Widget>[
-                          IconButton(
-                              icon: Icon(
-                                Icons.person,
-                                size: 40,
-                                color: Theme.of(context).primaryColor,
-                              ),
-                              alignment: Alignment.center,
-                              onPressed: () {
-                                Get.to(const Profile());
-                              })
+                          user_repo.currentUser.value.imageUrl != null
+                              ? GestureDetector(
+                                  onTap: () {
+                                    Get.to(const Profile());
+                                  },
+                                  child: CircleAvatar(
+                                    backgroundImage: NetworkImage(
+                                      "http://192.168.5.53:1337" +
+                                          user_repo.currentUser.value
+                                              .imageUrl!['url'],
+                                    ),
+                                    radius: 25,
+                                  ),
+                                )
+                              : IconButton(
+                                  icon: Icon(
+                                    Icons.person,
+                                    size: 40,
+                                    color: Theme.of(context).primaryColor,
+                                  ),
+                                  alignment: Alignment.center,
+                                  onPressed: () {
+                                    Get.to(const Profile());
+                                  })
                         ],
                       ),
                     ),
@@ -273,7 +291,7 @@ class _HomePageState extends State<HomePage> {
                                                   type: _con.vendorOrders[index]
                                                           .weeklyNeeded
                                                       ? "Weekly"
-                                                      : "Regular",
+                                                      : "Daily",
                                                   onClick: () {
                                                     // Navigator.push(
                                                     //   context,

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 import 'package:com_unrealprogrammer_orderingo/helpers/helper.dart';
 import 'package:com_unrealprogrammer_orderingo/models/orders.dart';
@@ -41,6 +42,36 @@ Future<Stream<Orders>> getVendorOrders() async {
 Future<bool> updateStatus(Orders order) async {
   String url = "${constants.apiBaseUrl}orders/${order.id}";
 
+  var body = {
+    "id": order.id,
+    "store": order.store,
+    "customer": null,
+    "delivery_date": order.deliveryDate.toString(),
+    "name": order.name,
+    "Weekly_needed": order.weeklyNeeded,
+    "total_amount": order.totalAmount,
+    "disocunt": order.disocunt,
+    "discount_code": null,
+    "quantity": order.quantity,
+    "published_at": order.publishedAt.toString(),
+    "created_at": order.createdAt.toString(),
+    "updated_at": order.updatedAt.toString(),
+    "deliver_types": order.deliverType,
+    "order_details": [],
+    "order_statuses": [
+      {
+        "id": 4,
+        "Name": "Process",
+        "IsActive": true,
+        "order": order.orderStatus[0].order,
+        "published_at": order.orderStatus[0].published_at,
+        "created_at": order.orderStatus[0].created_at,
+        "updated_at": "2022-07-13T21:39:44.060Z"
+      }
+    ],
+    "order_histories": []
+  };
+
   Uri uri = Uri.parse(url);
   final client = http.Client();
   try {
@@ -50,9 +81,9 @@ Future<bool> updateStatus(Orders order) async {
         'Content-type': 'application/json',
         'Accept': 'application/json',
       },
-      body: json.encode(order.toJson()),
+      body: json.encode(body),
     );
-    print(response.body);
+    log(response.body);
 
     Map<String, dynamic> responseJson = json.decode(response.body);
 

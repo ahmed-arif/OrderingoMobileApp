@@ -34,11 +34,11 @@ class OrdersController extends GetxController {
   Future<void> updateStatus(Orders order) async {
     final result = await order_repo.updateStatus(order);
     result
-        ? Get.showSnackbar(GetSnackBar(
+        ? Get.showSnackbar(const GetSnackBar(
             snackPosition: SnackPosition.BOTTOM,
-            message: "Status Updated to ${order.orderStatus[0].name}!",
-            duration: const Duration(seconds: 2),
-            backgroundColor: const Color.fromARGB(255, 193, 45, 45),
+            message: "Status Updated to Process!",
+            duration: Duration(seconds: 2),
+            backgroundColor: Color.fromARGB(255, 193, 45, 45),
           ))
         : Fluttertoast.showToast(msg: "Error: On Data Update");
   }
