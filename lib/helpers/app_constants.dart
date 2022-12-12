@@ -76,9 +76,8 @@ const String squareSC = "\u00B2";
 
 // Base URLs
 //const String baseUrl = "http://localhost:1337/";
-const String apiBaseUrl = "http://192.168.5.53:1337/";
-const String storageBaseUrl =
-    "http://arrantconstruction.mindwhizdev.co/storage/app/public/";
+const String apiBaseUrl = "http://192.168.0.185:1337/";
+const String storageBaseUrl = "http://jjjjj/";
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
